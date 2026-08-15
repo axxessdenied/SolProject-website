@@ -1,0 +1,70 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageIntro from '../../components/PageIntro.astro';
+import UpdateCard from '../../components/UpdateCard.astro';
+import { compareUpdates } from '../../lib/updates';
+
+const updates = (
+  await getCollection('updates', ({ data }) => !data.draft)
+).sort(compareUpdates);
+---
+
+<BaseLayout
+  title="Updates"
+  description="Milestone notes and occasional development updates from SolProject."
+>
+  <PageIntro
+    eyebrow="Updates / Development log"
+    title="Signals from the build."
+    intro="Occasional notes on runnable milestones, engineering decisions, and the work that remains—written from the project’s current source and planning documents."
+  />
+
+  <section class="container section-pad updates-section" aria-live="polite">
+    {
+      updates.length > 0 ? (
+        <div class="updates-grid">
+          {updates.map((update) => (
+            <UpdateCard update={update} />
+          ))}
+        </div>
+      ) : (
+        <div class="empty-state panel">
+          <p class="eyebrow">No transmissions yet</p>
+          <h2>Updates will appear here.</h2>
+          <p>
+            The project is active, but no public development notes have been
+            published in this collection.
+          </p>
+        </div>
+      )
+    }
+  </section>
+</BaseLayout>
+
+<style>
+  .updates-section {
+    padding-top: var(--space-4);
+  }
+
+  .updates-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-5);
+  }
+
+  .empty-state {
+    padding: var(--space-8);
+  }
+
+  .empty-state p:last-child {
+    max-width: 38rem;
+    color: var(--color-muted);
+  }
+
+  @media (max-width: 48rem) {
+    .updates-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

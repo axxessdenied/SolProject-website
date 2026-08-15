@@ -1,0 +1,376 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageIntro from '../components/PageIntro.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import { sourceLinks } from '../lib/site';
+---
+
+<BaseLayout
+  title="Engine"
+  description="Inside SolProject’s from-scratch C++20 engine: architecture, space-scale precision, rendering, simulation, and tools."
+>
+  <PageIntro
+    eyebrow="Engine / Implemented foundation"
+    title="The machinery behind the horizon."
+    intro="Sol Engine is a from-scratch C++20 engine built specifically for a large, persistent space simulation. Its first seven roadmap phases are implemented and verified; the architecture below distinguishes current systems from later plans."
+  >
+    <div class="button-row">
+      <a class="button-secondary" href={sourceLinks.repository}
+        >Browse source <span aria-hidden="true">↗</span></a
+      >
+      <a class="button-secondary" href={sourceLinks.enginePlan}
+        >Full engine plan <span aria-hidden="true">↗</span></a
+      >
+    </div>
+  </PageIntro>
+
+  <section class="wide-container engine-stats" aria-label="Engine facts">
+    <div><strong>C++20</strong><span>Exceptions off</span></div>
+    <div><strong>Vulkan</strong><span>Custom rendering layer</span></div>
+    <div><strong>60 Hz</strong><span>Fixed simulation tick</span></div>
+    <div><strong>10k+</strong><span>Entity milestone demonstrated</span></div>
+  </section>
+
+  <section class="wide-container section-pad architecture-section">
+    <div>
+      <SectionHeading
+        eyebrow="Architecture"
+        title="Hard boundaries. Deliberate layers."
+        intro="Each major module is a static library with dependencies enforced by the build graph. The game sits on the engine; lower layers cannot quietly reach upward."
+      />
+      <ol class="layer-list">
+        <li>
+          <span>08</span><strong>Game</strong><small>Content + game glue</small>
+        </li>
+        <li>
+          <span>07</span><strong>UI</strong><small
+            >Debug today, custom game UI later</small
+          >
+        </li>
+        <li>
+          <span>06</span><strong>Scripting</strong><small
+            >Lua 5.4 + explicit bindings</small
+          >
+        </li>
+        <li>
+          <span>05</span><strong>Simulation</strong><small
+            >Flight, combat, galaxy, economy</small
+          >
+        </li>
+        <li>
+          <span>04</span><strong>ECS + assets</strong><small
+            >State, data, hot reload</small
+          >
+        </li>
+        <li>
+          <span>03</span><strong>Renderer</strong><small
+            >HDR, impostors, particles</small
+          >
+        </li>
+        <li>
+          <span>02</span><strong>RHI</strong><small
+            >Vulkan resources + synchronization</small
+          >
+        </li>
+        <li>
+          <span>01</span><strong>Core + platform</strong><small
+            >Memory, jobs, Win32, input</small
+          >
+        </li>
+      </ol>
+    </div>
+    <aside class="architecture-note panel">
+      <p class="technical-label">Precision model</p>
+      <div class="coordinate-visual" aria-hidden="true">
+        <span class="axis axis-x"></span>
+        <span class="axis axis-y"></span>
+        <span class="origin"></span>
+        <span class="point point-a"></span>
+        <span class="point point-b"></span>
+      </div>
+      <h3>Double in simulation. Float at the camera.</h3>
+      <p>
+        World positions use double precision. Rendering subtracts a per-frame
+        camera origin before converting to float, preserving stable visuals at
+        solar-system distances.
+      </p>
+      <div class="architecture-proof">
+        <strong>Demonstrated</strong>
+        <span>127,000+ km scripted cruise at 10¹¹ m coordinates</span>
+      </div>
+    </aside>
+  </section>
+
+  <section class="container section-pad">
+    <SectionHeading
+      eyebrow="Selected systems / Implemented"
+      title="Tools for a simulation that has to keep moving."
+    />
+    <div class="card-grid">
+      <article class="info-card panel">
+        <span class="index">ECS / SPARSE SET</span>
+        <h3>Data shaped by evidence</h3>
+        <p>
+          A representative benchmark selected sparse-set storage for thousands
+          of ships and projectiles. Generational handles, queries, deferred
+          commands, and versioned serialization form the state backbone.
+        </p>
+      </article>
+      <article class="info-card panel">
+        <span class="index">SIM / TWO FIDELITIES</span>
+        <h3>Near detail, distant consequence</h3>
+        <p>
+          The current system runs at full fidelity. The wider galaxy advances
+          through coarse agents, allowing traders and markets to change beyond
+          the player’s immediate view.
+        </p>
+      </article>
+      <article class="info-card panel">
+        <span class="index">DATA / HOT RELOAD</span>
+        <h3>Iteration without a restart</h3>
+        <p>
+          Shader, Lua, and validated TOML definitions can reload during
+          development. Mod layers use the same data and scripting mechanisms as
+          the base game.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section class="wide-container section-pad principles-section">
+    <div>
+      <p class="eyebrow">Engineering principles</p>
+      <h2>Small enough to understand. Strong enough to extend.</h2>
+    </div>
+    <ul class="fact-list principles-list">
+      <li>
+        <strong>Purpose-built scope</strong>
+        The engine solves this game’s needs: no editor suite, general-purpose abstraction,
+        or speculative subsystem without a milestone that needs it.
+      </li>
+      <li>
+        <strong>Deterministic systems</strong>
+        Fixed-step simulation, seeded PRNG streams, and explicit save formats keep
+        outcomes testable and state reproducible.
+      </li>
+      <li>
+        <strong>Debuggability from day one</strong>
+        Validation, logs, debug draw, metrics, and the Dear ImGui development overlay
+        expose systems while they are still being built.
+      </li>
+      <li>
+        <strong>Measured milestones</strong>
+        Every phase ends in a runnable proof with exit criteria, tests, and documented
+        caveats—not just an inventory of source files.
+      </li>
+    </ul>
+  </section>
+</BaseLayout>
+
+<style>
+  .engine-stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    border-block: 1px solid var(--color-line);
+  }
+
+  .engine-stats > div {
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-5);
+    border-left: 1px solid var(--color-line);
+    gap: var(--space-1);
+  }
+
+  .engine-stats > div:first-child {
+    border-left: 0;
+  }
+
+  .engine-stats strong {
+    color: var(--color-text);
+    font-family: var(--font-mono);
+    font-size: var(--step-1);
+  }
+
+  .engine-stats span {
+    color: var(--color-dim);
+    font-size: var(--step--2);
+  }
+
+  .architecture-section {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    align-items: start;
+    gap: var(--space-8);
+  }
+
+  .layer-list {
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--color-line);
+    list-style: none;
+  }
+
+  .layer-list li {
+    display: grid;
+    grid-template-columns: 2rem 8rem 1fr;
+    align-items: center;
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid var(--color-line);
+    border-top: 0;
+    background: linear-gradient(90deg, var(--color-surface-soft), transparent);
+    gap: var(--space-3);
+  }
+
+  .layer-list span {
+    color: var(--color-accent-bright);
+    font-family: var(--font-mono);
+    font-size: var(--step--2);
+  }
+
+  .layer-list strong {
+    font-size: var(--step--1);
+  }
+
+  .layer-list small {
+    color: var(--color-dim);
+  }
+
+  .architecture-note {
+    position: sticky;
+    top: var(--space-6);
+    padding: var(--space-6);
+  }
+
+  .coordinate-visual {
+    position: relative;
+    height: 15rem;
+    margin-block: var(--space-6);
+    overflow: hidden;
+    border: 1px solid var(--color-line);
+    background:
+      linear-gradient(var(--color-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--color-line) 1px, transparent 1px);
+    background-size: 2rem 2rem;
+  }
+
+  .axis {
+    position: absolute;
+    background: var(--color-line-strong);
+  }
+
+  .axis-x {
+    top: 50%;
+    right: 0;
+    left: 0;
+    height: 1px;
+  }
+
+  .axis-y {
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 1px;
+  }
+
+  .origin,
+  .point {
+    position: absolute;
+    width: 0.6rem;
+    aspect-ratio: 1;
+    border-radius: 50%;
+  }
+
+  .origin {
+    top: 50%;
+    left: 50%;
+    background: var(--color-text);
+    box-shadow: 0 0 1rem var(--color-text);
+    transform: translate(-50%, -50%);
+  }
+
+  .point-a {
+    top: 24%;
+    left: 19%;
+    background: var(--color-warm);
+  }
+
+  .point-b {
+    right: 10%;
+    bottom: 19%;
+    background: var(--color-accent-bright);
+  }
+
+  .architecture-note > p {
+    color: var(--color-muted);
+  }
+
+  .architecture-proof {
+    display: flex;
+    flex-direction: column;
+    margin-top: var(--space-6);
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--color-line);
+    gap: var(--space-1);
+  }
+
+  .architecture-proof strong {
+    color: var(--color-accent-bright);
+    font-family: var(--font-mono);
+    font-size: var(--step--2);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .architecture-proof span {
+    color: var(--color-muted);
+    font-size: var(--step--1);
+  }
+
+  .principles-section {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    border-top: 1px solid var(--color-line);
+    gap: var(--space-8);
+  }
+
+  .principles-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--space-6);
+  }
+
+  @media (max-width: 58rem) {
+    .architecture-section,
+    .principles-section {
+      grid-template-columns: 1fr;
+    }
+
+    .architecture-note {
+      position: static;
+    }
+  }
+
+  @media (max-width: 42rem) {
+    .engine-stats,
+    .principles-list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .engine-stats > div:nth-child(3) {
+      border-left: 0;
+    }
+
+    .engine-stats > div:nth-child(n + 3) {
+      border-top: 1px solid var(--color-line);
+    }
+
+    .layer-list li {
+      grid-template-columns: 2rem 1fr;
+    }
+
+    .layer-list small {
+      grid-column: 2;
+    }
+  }
+</style>

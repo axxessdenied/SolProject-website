@@ -1,0 +1,285 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageIntro from '../components/PageIntro.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import { sourceLinks } from '../lib/site';
+---
+
+<BaseLayout
+  title="Game"
+  description="Explore SolProject’s player fantasy, core loops, living galaxy, and explicit first-release scope."
+>
+  <PageIntro
+    eyebrow="Game / Design direction"
+    title="Make a life between the stars."
+    intro="SolProject is designed as a single-player 3D space sandbox: a long journey from one modest ship to wealth, reputation, and influence inside a galaxy that continues without you."
+  >
+    <div class="button-row">
+      <a class="button-secondary" href={sourceLinks.gameDesign}
+        >Full game design document <span aria-hidden="true">↗</span></a
+      >
+    </div>
+  </PageIntro>
+
+  <section class="container section-pad game-status">
+    <div class="callout">
+      <p>
+        <strong>Design intent and implementation are labeled separately.</strong
+        >
+        The engine has a playable flight, combat, universe, and economy foundation.
+        Progression, missions, faction simulation, outfitting, and the remaining sandbox
+        depth are Phase 8+ directions, not finished game features.
+      </p>
+    </div>
+  </section>
+
+  <section class="container section-pad">
+    <SectionHeading
+      eyebrow="Four pillars"
+      title="The rules that hold the fantasy together."
+    />
+    <div class="pillar-grid">
+      <article class="pillar panel">
+        <span>01</span>
+        <div>
+          <h3>Pilot, not cursor</h3>
+          <p>
+            Experience the world from a ship you directly fly. The map informs
+            the journey; it does not replace the cockpit.
+          </p>
+        </div>
+      </article>
+      <article class="pillar panel">
+        <span>02</span>
+        <div>
+          <h3>A universe in motion</h3>
+          <p>
+            Traders, pirates, and factions pursue their own goals. The player
+            enters an existing system instead of triggering it into life.
+          </p>
+        </div>
+      </article>
+      <article class="pillar panel">
+        <span>03</span>
+        <div>
+          <h3>Nobody to somebody</h3>
+          <p>
+            Power is earned through ships, equipment, knowledge, money, and
+            relationships—not character levels.
+          </p>
+        </div>
+      </article>
+      <article class="pillar panel">
+        <span>04</span>
+        <div>
+          <h3>Systems over scripts</h3>
+          <p>
+            Data-driven content and Lua scripting are intended to make the base
+            game follow the same rules as a mod.
+          </p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="wide-container section-pad loops-section">
+    <SectionHeading
+      eyebrow="Core loops / Committed design"
+      title="A reason to care at every scale."
+      intro="Each layer should work on its own, from the feel of one maneuver to the consequences of a long career."
+    />
+    <ol class="loop-list">
+      <li>
+        <div class="loop-time">Moment</div>
+        <div>
+          <h3>Fly the ship</h3>
+          <p>Maneuver, manage momentum, fight, dodge, dock, and scan.</p>
+        </div>
+        <span class="confidence-chip">Core</span>
+      </li>
+      <li>
+        <div class="loop-time">30–90 min</div>
+        <div>
+          <h3>Make a run</h3>
+          <p>
+            Follow a contract, trade route, pirate signal, asteroid field, or
+            unexplored gate—then return to sell and refit.
+          </p>
+        </div>
+        <span class="confidence-chip">Core</span>
+      </li>
+      <li>
+        <div class="loop-time">Tens of hours</div>
+        <div>
+          <h3>Shape a career</h3>
+          <p>
+            Build standing, find enemies, acquire specialized ships, open new
+            markets, and eventually seed wider influence.
+          </p>
+        </div>
+        <span class="confidence-chip likely">Likely</span>
+      </li>
+    </ol>
+  </section>
+
+  <section class="container section-pad world-section">
+    <div>
+      <p class="eyebrow">The galaxy / Committed design</p>
+      <h2>Procedural breadth. Authored character.</h2>
+      <p class="world-copy">
+        The design targets a seeded network of 50–150 systems, organized into a
+        civilized core, contested frontier, and lawless fringe. Faction
+        identities, ships, economy rules, and story anchors are handcrafted;
+        generation decides how they inhabit the galaxy.
+      </p>
+    </div>
+    <div class="world-facts panel">
+      <ul class="fact-list">
+        <li>
+          <strong>Gate lanes + cruise</strong>
+          Travel remains at 1× real time, with distances and cruise speeds tuned for
+          short, consequential legs.
+        </li>
+        <li>
+          <strong>Persistent state</strong>
+          The economy, relationships, and meaningful wrecks are intended to survive
+          in one continuous save.
+        </li>
+        <li>
+          <strong>Local information</strong>
+          Markets respond to station stock. No omniscient global price board erases
+          the value of scouting.
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="container section-pad">
+    <SectionHeading
+      eyebrow="Scope guardrails"
+      title="A focused space game, by design."
+      intro="These are explicit non-goals for the first shipped version, not missing promises."
+    />
+    <ul class="scope-list scope-grid">
+      <li><strong>Not included:</strong> multiplayer of any kind</li>
+      <li>
+        <strong>Not included:</strong> planetary landings or atmospheric flight
+      </li>
+      <li><strong>Not included:</strong> walking aboard ships or stations</li>
+      <li><strong>Not included:</strong> block-based ship construction</li>
+      <li><strong>Not included:</strong> colony-scale empire management</li>
+      <li>
+        <strong>Not included:</strong> huge fleet battles, VR, or base building
+      </li>
+    </ul>
+  </section>
+</BaseLayout>
+
+<style>
+  .game-status {
+    padding-top: 0;
+  }
+
+  .pillar-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-4);
+  }
+
+  .pillar {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    padding: var(--space-6);
+    gap: var(--space-5);
+  }
+
+  .pillar > span {
+    color: var(--color-accent-bright);
+    font-family: var(--font-mono);
+    font-size: var(--step--2);
+  }
+
+  .pillar p {
+    margin: var(--space-3) 0 0;
+    color: var(--color-muted);
+  }
+
+  .loops-section {
+    border-block: 1px solid var(--color-line);
+  }
+
+  .loop-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .loop-list li {
+    display: grid;
+    grid-template-columns: 9rem 1fr auto;
+    align-items: center;
+    padding-block: var(--space-6);
+    border-top: 1px solid var(--color-line);
+    gap: var(--space-6);
+  }
+
+  .loop-time {
+    color: var(--color-accent-bright);
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+  }
+
+  .loop-list p {
+    margin: var(--space-2) 0 0;
+    color: var(--color-muted);
+  }
+
+  .world-section {
+    display: grid;
+    grid-template-columns: 1fr 0.85fr;
+    align-items: start;
+    gap: var(--space-8);
+  }
+
+  .world-copy {
+    color: var(--color-muted);
+    font-size: var(--step-1);
+  }
+
+  .world-facts {
+    padding: var(--space-5) var(--space-6);
+  }
+
+  .scope-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-block: 1px solid var(--color-line);
+    column-gap: var(--space-7);
+  }
+
+  .scope-grid strong {
+    color: var(--color-warm);
+  }
+
+  @media (max-width: 54rem) {
+    .pillar-grid,
+    .world-section,
+    .scope-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .loop-list li {
+      grid-template-columns: 1fr auto;
+    }
+
+    .loop-time {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 34rem) {
+    .loop-list li {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

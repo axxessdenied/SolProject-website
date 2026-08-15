@@ -1,0 +1,26 @@
+---
+title: 'Universe and economy foundations are in place'
+description: 'Phase 7 closes with a connected seeded galaxy, local markets, coarse trader agents, gate travel, docking, and full save/load.'
+slug: 'universe-economy-foundations'
+publishedAt: '2026-08-15'
+tags:
+  - 'milestone'
+  - 'engine'
+draft: false
+---
+
+Phase 7 of the engine roadmap is complete. SolProject can now generate a deterministic, connected galaxy; instantiate the player’s current system as a full simulation bubble; and keep the rest advancing through a coarser model.
+
+## What the milestone proves
+
+The current build supports gate travel between generated systems, autodocking at stations, local commodity markets, and trader agents that search for profitable routes. Prices move from station stock changes rather than from a scripted sequence.
+
+The complete galaxy and economy state also participates in versioned save/load. A milestone run bought machinery in a market with excess stock, crossed four gate hops, sold into a more expensive market, and restored the intermediate state after a full process restart.
+
+## Still deliberately provisional
+
+This is the simulation foundation, not the finished trading game. The market screen is still a development interface, remote price knowledge is manual, docking is autodock-only, and coarse traders do not yet appear as full ships when the player enters their system.
+
+Phase 8+ is currently a sketch rather than an active milestone. Factions, reputation, contracts, outfitting, progression, player-facing UI, audio, mining, salvage, and exploration each need a focused specification before implementation starts.
+
+The [full engine plan](https://github.com/axxessdenied/SolProject/blob/main/docs/engine-plan.md) records the exit run, measured results, and remaining caveats.
