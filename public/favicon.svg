@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">The Stars Don’t Wait</title>
+  <rect width="64" height="64" rx="12" fill="#020a1d" />
+  <g transform="translate(4 4) scale(.21875)">
+    <g fill="none" stroke="#f7edcf" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M109 58C90 78 76 105 67 137" stroke-width="11" />
+      <path d="M80 180C108 199 150 199 176 180" stroke-width="11" />
+      <circle cx="128" cy="40" r="24" pathLength="100" stroke-dasharray="86 14" stroke-width="13" transform="rotate(-45 128 40)" />
+      <circle cx="59" cy="160" r="24" pathLength="100" stroke-dasharray="86 14" stroke-width="13" transform="rotate(25 59 160)" />
+      <circle cx="197" cy="160" r="24" pathLength="100" stroke-dasharray="86 14" stroke-width="13" transform="rotate(-25 197 160)" />
+    </g>
+    <path d="M147 57C170 78 189 108 194 138" fill="none" stroke="#f2a83b" stroke-width="11" stroke-linecap="round" />
+    <path d="M128 109L133 123L147 128L133 133L128 147L123 133L109 128L123 123Z" fill="#f7edcf" />
+  </g>
+</svg>
