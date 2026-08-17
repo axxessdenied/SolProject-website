@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import SiteFooter from '../components/SiteFooter.astro';
 import SiteHeader from '../components/SiteHeader.astro';
+import { withBase } from '../lib/paths';
 
 interface Props {
   title: string;
@@ -28,10 +29,7 @@ const canonical = Astro.site
     <meta property="og:url" content={canonical} />
     <meta name="twitter:card" content="summary" />
     <link rel="canonical" href={canonical} />
-    <link
-      rel="icon"
-      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><circle cx=%2216%22 cy=%2216%22 r=%225%22 fill=%22%2372f0d0%22/><ellipse cx=%2216%22 cy=%2216%22 rx=%2214%22 ry=%225%22 fill=%22none%22 stroke=%22%2372f0d0%22/></svg>"
-    />
+    <link rel="icon" href={withBase('favicon.svg')} type="image/svg+xml" />
     <title>{pageTitle}</title>
   </head>
   <body>
