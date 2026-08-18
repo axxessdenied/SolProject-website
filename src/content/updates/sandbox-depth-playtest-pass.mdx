@@ -1,0 +1,39 @@
+---
+title: 'Eleven sandbox milestones change the shape of the build'
+description: 'Phases 8a–8k add progression, factions, missions, custom UI, exploration, industry, navigation, direct targeting, and rebindable controls.'
+slug: 'sandbox-depth-playtest-pass'
+publishedAt: '2026-08-17'
+tags:
+  - 'milestone'
+  - 'gameplay'
+draft: false
+---
+
+The engine foundation is no longer the whole story. Since Phase 7 closed, **eleven focused Phase 8 milestones have been implemented and verified**, moving The Stars Don't Wait from a flight-and-economy foundation toward a connected sandbox loop.
+
+## A career has shape
+
+Players can buy and store ships, fit weapons and modules, hire crew, and recover through insurance after a non-hardcore loss. Faction relations now change without waiting for the player: patrols, raids, wars, standing thresholds, docking rights, and station catalogs all respond to the same simulated state.
+
+The mission layer builds on that state. Stations can offer haul work from real shortages and bounties from raid activity, while a Lua-authored opening campaign act uses the same saved objective machinery. Contracts, campaign progress, rewards, penalties, and deadlines survive save and load.
+
+## The game can explain itself
+
+Phase 8d replaced provisional player-facing ImGui screens with an in-repo UI stack: cooked fonts, a flight HUD, station screens, menus, settings, and save controls. Dear ImGui remains only in development surfaces.
+
+Exploration then added system knowledge, pulse and target scans, signals, survey data, route plotting, and system and galaxy maps. Mining and salvage added seeded asteroid fields, beam extraction, collectible ore, persistent wrecks, and station refining. The economy pass that followed made production consume real inputs, added NPC miners, rebalanced logistics, and exposed age-stamped remote market reports.
+
+## Four passes came from playing
+
+Phases 8h–8k answer concrete playtest findings rather than a prewritten feature list:
+
+- A contact radar, separate navigation and combat targets, zoomable maps, bookmarks, and a ship-information screen make nearby state visible.
+- Mission locations now appear on the HUD, radar, and maps, and a dedicated action selects the nearest hostile.
+- The flight view and radar support direct click selection.
+- Keyboard and mouse actions can be rebound, while mouse sensitivity, pitch inversion, and V-Sync settings now affect the running game.
+
+## Current work: Phase 8l
+
+The fourth playtest found a bounty that could become permanently stuck when local security landed the final shot, and a mission board that did not recompose while the player remained docked. Phase 8l is specified to add a short assist-credit window, bounty deadlines, and event-driven board refreshes without giving the player reputation for an NPC's kill.
+
+That milestone is **current work, not recorded as complete**. A cockpit view with an integrated HUD, audio, performance hardening, broader content, and the later Linux backend also remain ahead. The [full engine plan](https://github.com/axxessdenied/SolProject/blob/main/docs/engine-plan.md) carries the detailed evidence and caveats for every completed phase.

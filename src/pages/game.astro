@@ -7,12 +7,12 @@ import { sourceLinks } from '../lib/site';
 
 <BaseLayout
   title="Game"
-  description="Explore SolProject’s player fantasy, core loops, living galaxy, and explicit first-release scope."
+  description="Explore The Stars Don’t Wait’s player fantasy, core loops, living galaxy, and explicit first-release scope."
 >
   <PageIntro
     eyebrow="Game / Design direction"
     title="Make a life between the stars."
-    intro="SolProject is designed as a single-player 3D space sandbox: a long journey from one modest ship to wealth, reputation, and influence inside a galaxy that continues without you."
+    intro="The Stars Don’t Wait is a single-player 3D space sandbox in development: a long journey from one modest ship to wealth, reputation, and influence inside a galaxy that continues without you."
   >
     <div class="button-row">
       <a class="button-secondary" href={sourceLinks.gameDesign}
@@ -24,11 +24,15 @@ import { sourceLinks } from '../lib/site';
   <section class="container section-pad game-status">
     <div class="callout">
       <p>
-        <strong>Design intent and implementation are labeled separately.</strong
+        <strong
+          >The current build is a substantial playable slice, not a finished
+          game.</strong
         >
-        The engine has a playable flight, combat, universe, and economy foundation.
-        Progression, missions, faction simulation, outfitting, and the remaining sandbox
-        depth are Phase 8+ directions, not finished game features.
+        Flight, combat, the persistent galaxy and economy, outfitting, factions, missions,
+        the opening campaign act, exploration, mining, salvage, custom UI, navigation,
+        targeting, and rebindable controls are implemented and verified. Content breadth,
+        audio, deeper faction territory changes, a cockpit-integrated HUD, and performance
+        hardening remain ahead.
       </p>
     </div>
   </section>
@@ -74,8 +78,8 @@ import { sourceLinks } from '../lib/site';
         <div>
           <h3>Systems over scripts</h3>
           <p>
-            Data-driven content and Lua scripting are intended to make the base
-            game follow the same rules as a mod.
+            Data-driven content and sandboxed Lua scripting let the base game
+            use the same layering mechanisms as mods.
           </p>
         </div>
       </article>
@@ -102,8 +106,8 @@ import { sourceLinks } from '../lib/site';
         <div>
           <h3>Make a run</h3>
           <p>
-            Follow a contract, trade route, pirate signal, asteroid field, or
-            unexplored gate—then return to sell and refit.
+            Follow a contract, trade route, signal, asteroid field, wreck, or
+            unexplored gate—then return to sell, refine, and refit.
           </p>
         </div>
         <span class="confidence-chip">Core</span>
@@ -142,13 +146,13 @@ import { sourceLinks } from '../lib/site';
         </li>
         <li>
           <strong>Persistent state</strong>
-          The economy, relationships, and meaningful wrecks are intended to survive
-          in one continuous save.
+          Markets, faction relations, mission progress, survey knowledge, depletion,
+          wrecks, fleet state, and fittings survive in one continuous save.
         </li>
         <li>
           <strong>Local information</strong>
-          Markets respond to station stock. No omniscient global price board erases
-          the value of scouting.
+          Markets respond to station stock. Remote reports age, so travel and renewed
+          observation still matter.
         </li>
       </ul>
     </div>

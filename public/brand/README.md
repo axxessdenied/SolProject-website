@@ -1,6 +1,6 @@
 # The Stars Don’t Wait logo assets
 
-These SVGs are project-owned logo artwork for the game currently developed under the working name **Sol**. They preserve the public website name **SolProject** until a separate site-rebranding decision is made.
+These SVGs are project-owned logo artwork for **The Stars Don't Wait**, the public name of the game developed in the internal **SolProject** repository.
 
 ## Variants
 
@@ -14,6 +14,6 @@ All logo files have transparent backgrounds except the favicon, which includes a
 
 ## Source and ownership
 
-The direction was selected by the project owner on 2026-08-16 from AI-assisted visual explorations made specifically for SolProject, then redrawn as deterministic SVG geometry in this repository. It contains no imported third-party artwork, trademarks, fonts, or stock media.
+The direction was selected by the project owner on 2026-08-16 from AI-assisted visual explorations made specifically for The Stars Don't Wait, then redrawn as deterministic SVG geometry in this repository. It contains no imported third-party artwork, trademarks, fonts, or stock media.
 
 These assets are covered by the repository license unless the project owner publishes separate brand-usage terms later.

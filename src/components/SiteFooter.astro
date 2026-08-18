@@ -6,8 +6,19 @@ import { withBase } from '../lib/paths';
 <footer class="site-footer">
   <div class="footer-inner">
     <div class="footer-lead">
-      <a class="footer-brand" href={withBase()}>SolProject</a>
-      <p>An independent space sandbox, built from first principles.</p>
+      <a
+        class="footer-brand"
+        href={withBase()}
+        aria-label="The Stars Don’t Wait home"
+      >
+        <img
+          src={withBase('brand/the-stars-dont-wait-lockup-monochrome.svg')}
+          alt=""
+          width="1120"
+          height="320"
+        />
+      </a>
+      <p>Carve out a life in a galaxy already in motion.</p>
     </div>
 
     <nav aria-label="Footer navigation">
@@ -23,7 +34,7 @@ import { withBase } from '../lib/paths';
     </nav>
 
     <div class="footer-meta">
-      <span>© 2026 SolProject</span>
+      <span>© 2026 The Stars Don’t Wait</span>
       <a href={sourceLinks.repository}>Source code</a>
     </div>
   </div>
@@ -54,11 +65,15 @@ import { withBase } from '../lib/paths';
   }
 
   .footer-brand {
-    color: var(--color-text);
-    font-size: var(--step-2);
-    font-weight: 760;
-    letter-spacing: -0.035em;
+    display: block;
+    width: min(100%, 19rem);
     text-decoration: none;
+  }
+
+  .footer-brand img {
+    display: block;
+    width: 100%;
+    height: auto;
   }
 
   nav ul {
