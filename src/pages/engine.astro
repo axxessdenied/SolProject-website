@@ -7,12 +7,12 @@ import { sourceLinks } from '../lib/site';
 
 <BaseLayout
   title="Engine"
-  description="Inside SolProject’s from-scratch C++20 engine: architecture, space-scale precision, rendering, simulation, and tools."
+  description="Inside The Stars Don’t Wait’s from-scratch C++20 engine: architecture, space-scale precision, rendering, simulation, and tools."
 >
   <PageIntro
     eyebrow="Engine / Implemented foundation"
     title="The machinery behind the horizon."
-    intro="Sol Engine is a from-scratch C++20 engine built specifically for a large, persistent space simulation. Its first seven roadmap phases are implemented and verified; the architecture below distinguishes current systems from later plans."
+    intro="Sol Engine is a from-scratch C++20 engine built specifically for a large, persistent space simulation. Eight foundation phases and eleven focused sandbox milestones are implemented and verified; the architecture below distinguishes those systems from work still ahead."
   >
     <div class="button-row">
       <a class="button-secondary" href={sourceLinks.repository}
@@ -44,7 +44,7 @@ import { sourceLinks } from '../lib/site';
         </li>
         <li>
           <span>07</span><strong>UI</strong><small
-            >Debug today, custom game UI later</small
+            >Custom game UI + dev overlay</small
           >
         </li>
         <li>
@@ -54,7 +54,7 @@ import { sourceLinks } from '../lib/site';
         </li>
         <li>
           <span>05</span><strong>Simulation</strong><small
-            >Flight, combat, galaxy, economy</small
+            >Galaxy, economy, factions, missions</small
           >
         </li>
         <li>
@@ -121,8 +121,8 @@ import { sourceLinks } from '../lib/site';
         <h3>Near detail, distant consequence</h3>
         <p>
           The current system runs at full fidelity. The wider galaxy advances
-          through coarse agents, allowing traders and markets to change beyond
-          the player’s immediate view.
+          through coarse agents, allowing traders, miners, markets, factions,
+          and mission conditions to change beyond the player’s immediate view.
         </p>
       </article>
       <article class="info-card panel">
@@ -132,6 +132,33 @@ import { sourceLinks } from '../lib/site';
           Shader, Lua, and validated TOML definitions can reload during
           development. Mod layers use the same data and scripting mechanisms as
           the base game.
+        </p>
+      </article>
+      <article class="info-card panel">
+        <span class="index">UI / IN-REPO STACK</span>
+        <h3>Player-facing, without a web layer</h3>
+        <p>
+          A custom immediate-mode renderer, cooked TrueType atlases, menu shell,
+          HUD, station screens, maps, radar, and settings keep the game UI
+          inside the engine. Dear ImGui remains a development tool.
+        </p>
+      </article>
+      <article class="info-card panel">
+        <span class="index">SIM / PERSISTENT SYSTEMS</span>
+        <h3>Different loops, one saved world</h3>
+        <p>
+          Markets, production chains, faction relations, contracts, survey
+          knowledge, depleted rocks, wrecks, fleets, and fittings all
+          participate in explicit versioned state.
+        </p>
+      </article>
+      <article class="info-card panel">
+        <span class="index">INPUT / PLAYTEST-DRIVEN</span>
+        <h3>The screen says what the sim knows</h3>
+        <p>
+          Radar, map zoom, bookmarks, mission markers, direct selection, threat
+          targeting, ship information, and rebindable controls were added from
+          concrete playtest findings.
         </p>
       </article>
     </div>

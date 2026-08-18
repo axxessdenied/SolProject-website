@@ -107,24 +107,24 @@ test('a published update is listed and has a generated detail page', async ({
 }) => {
   await page.goto('updates/');
   const updateLink = page.getByRole('link', {
-    name: 'Universe and economy foundations are in place',
+    name: 'Eleven sandbox milestones change the shape of the build',
     exact: true,
   });
   await expect(updateLink).toHaveAttribute(
     'href',
-    `${basePath}updates/universe-economy-foundations/`,
+    `${basePath}updates/sandbox-depth-playtest-pass/`,
   );
 
   await updateLink.click();
   await expect(
     page.getByRole('heading', {
       level: 1,
-      name: 'Universe and economy foundations are in place',
+      name: 'Eleven sandbox milestones change the shape of the build',
     }),
   ).toBeVisible();
 });
 
-for (const path of ['', 'game/', 'updates/universe-economy-foundations/']) {
+for (const path of ['', 'game/', 'updates/sandbox-depth-playtest-pass/']) {
   test(`${path || 'home'} has no serious or critical axe violations`, async ({
     page,
   }) => {

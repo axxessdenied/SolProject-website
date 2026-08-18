@@ -1,18 +1,18 @@
 :root {
   color-scheme: dark;
-  --color-bg-deep: #03070a;
-  --color-bg: #071015;
-  --color-surface: #0b171d;
-  --color-surface-raised: #102128;
-  --color-surface-soft: rgb(126 188 193 / 8%);
-  --color-line: rgb(157 207 211 / 18%);
-  --color-line-strong: rgb(157 220 218 / 34%);
-  --color-text: #f0f7f6;
-  --color-muted: #b3c5c6;
-  --color-dim: #819699;
-  --color-accent: #41c6ab;
-  --color-accent-bright: #82f3d5;
-  --color-warm: #edc77d;
+  --color-bg-deep: #01040d;
+  --color-bg: #020a1d;
+  --color-surface: #071326;
+  --color-surface-raised: #0b1c32;
+  --color-surface-soft: rgb(247 237 207 / 6%);
+  --color-line: rgb(179 198 217 / 16%);
+  --color-line-strong: rgb(242 168 59 / 38%);
+  --color-text: #f7edcf;
+  --color-muted: #c7c1ad;
+  --color-dim: #9299a0;
+  --color-accent: #f2a83b;
+  --color-accent-bright: #ffd17a;
+  --color-warm: #80c7f2;
   --color-focus: #ffe29a;
   --font-sans: Inter, Aptos, 'Segoe UI', Helvetica, Arial, sans-serif;
   --font-mono: 'Cascadia Code', 'SFMono-Regular', Consolas, monospace;
@@ -62,8 +62,12 @@ body {
   margin: 0;
   overflow-x: hidden;
   background:
-    radial-gradient(circle at 75% 5%, rgb(48 132 122 / 13%), transparent 27rem),
-    radial-gradient(circle at 15% 38%, rgb(44 89 116 / 10%), transparent 30rem),
+    radial-gradient(circle at 75% 5%, rgb(242 168 59 / 12%), transparent 27rem),
+    radial-gradient(
+      circle at 15% 38%,
+      rgb(73 129 188 / 14%),
+      transparent 30rem
+    ),
     linear-gradient(180deg, var(--color-bg), var(--color-bg-deep));
   color: var(--color-text);
   font-family: var(--font-sans);
@@ -315,7 +319,7 @@ a:hover {
   border: 1px solid var(--color-accent);
   border-radius: var(--radius-sm);
   background: var(--color-accent);
-  color: #03100d;
+  color: var(--color-bg-deep);
   font-size: var(--step--1);
   font-weight: 740;
   text-decoration: none;
@@ -328,7 +332,7 @@ a:hover {
 .button:hover {
   border-color: var(--color-accent-bright);
   background: var(--color-accent-bright);
-  color: #03100d;
+  color: var(--color-bg-deep);
   transform: translateY(-2px);
 }
 

@@ -13,9 +13,13 @@ function isCurrent(path: string): boolean {
 
 <header class="site-header">
   <div class="header-inner">
-    <a class="brand" href={homePath} aria-label="SolProject home">
-      <span class="brand-mark" aria-hidden="true"><span></span></span>
-      <span>SolProject</span>
+    <a class="brand" href={homePath} aria-label="The Stars Don’t Wait home">
+      <img
+        src={withBase('brand/the-stars-dont-wait-lockup-horizontal.svg')}
+        alt=""
+        width="1120"
+        height="320"
+      />
     </a>
 
     <nav aria-label="Primary navigation">
@@ -57,51 +61,15 @@ function isCurrent(path: string): boolean {
   }
 
   .brand {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.7rem;
-    color: var(--color-text);
-    font-size: var(--step-0);
-    font-weight: 720;
-    letter-spacing: -0.025em;
+    display: block;
+    width: clamp(9.5rem, 18vw, 13rem);
     text-decoration: none;
-    white-space: nowrap;
   }
 
-  .brand-mark {
-    position: relative;
-    display: grid;
-    width: 1.65rem;
-    aspect-ratio: 1;
-    place-items: center;
-    border: 1px solid var(--color-accent);
-    border-radius: 50%;
-    box-shadow: 0 0 1rem
-      color-mix(in srgb, var(--color-accent) 25%, transparent);
-  }
-
-  .brand-mark::before,
-  .brand-mark::after {
-    position: absolute;
-    width: 2.15rem;
-    height: 0.35rem;
-    border: 1px solid color-mix(in srgb, var(--color-accent) 70%, transparent);
-    border-width: 1px 0;
-    border-radius: 50%;
-    content: '';
-    transform: rotate(-28deg);
-  }
-
-  .brand-mark::after {
-    transform: rotate(28deg);
-  }
-
-  .brand-mark span {
-    width: 0.35rem;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    background: var(--color-accent-bright);
-    box-shadow: 0 0 0.7rem var(--color-accent);
+  .brand img {
+    display: block;
+    width: 100%;
+    height: auto;
   }
 
   nav ul {

@@ -1,6 +1,6 @@
-# SolProject website
+# The Stars Don't Wait website
 
-The static public showcase for [SolProject](https://github.com/axxessdenied/SolProject), built with Astro and MDX.
+The static public showcase for **The Stars Don't Wait**, developed in the [SolProject](https://github.com/axxessdenied/SolProject) repository and built here with Astro and MDX.
 
 ## Local development
 
