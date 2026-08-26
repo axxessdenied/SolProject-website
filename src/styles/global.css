@@ -61,14 +61,7 @@ body {
   min-height: 100vh;
   margin: 0;
   overflow-x: hidden;
-  background:
-    radial-gradient(circle at 75% 5%, rgb(242 168 59 / 12%), transparent 27rem),
-    radial-gradient(
-      circle at 15% 38%,
-      rgb(73 129 188 / 14%),
-      transparent 30rem
-    ),
-    linear-gradient(180deg, var(--color-bg), var(--color-bg-deep));
+  background: var(--color-bg-deep);
   color: var(--color-text);
   font-family: var(--font-sans);
   font-size: var(--step-0);
@@ -86,7 +79,7 @@ body {
     linear-gradient(90deg, var(--color-line) 1px, transparent 1px);
   background-size: 5rem 5rem;
   mask-image: linear-gradient(to bottom, rgb(0 0 0 / 45%), transparent 48rem);
-  opacity: 0.17;
+  opacity: 0.12;
 }
 
 main,
@@ -97,6 +90,11 @@ main,
 
 main {
   z-index: 1;
+}
+
+.site-header,
+.site-footer {
+  z-index: 2;
 }
 
 h1,
@@ -206,6 +204,10 @@ a:hover {
 
 .page-intro {
   position: relative;
+  display: flex;
+  min-height: clamp(30rem, 66svh, 43rem);
+  flex-direction: column;
+  justify-content: center;
   padding-bottom: var(--space-8);
 }
 
@@ -232,7 +234,7 @@ a:hover {
 .panel {
   border: 1px solid var(--color-line);
   border-radius: var(--radius-md);
-  background: linear-gradient(145deg, rgb(21 43 51 / 76%), rgb(7 16 21 / 72%));
+  background: linear-gradient(145deg, rgb(16 34 51 / 88%), rgb(4 11 23 / 86%));
   box-shadow: var(--shadow-glow);
 }
 
@@ -515,6 +517,10 @@ a:hover {
 
   .callout {
     padding-inline: var(--space-4);
+  }
+
+  .page-intro {
+    min-height: 32rem;
   }
 }
 

@@ -1,0 +1,185 @@
+---
+interface Props {
+  image: string;
+  theme: 'home' | 'game' | 'engine' | 'roadmap' | 'updates';
+}
+
+const { image, theme } = Astro.props;
+---
+
+<div
+  class={`space-backdrop space-backdrop--${theme}`}
+  style={`--space-art: url("${image}")`}
+  data-space-backdrop={theme}
+  aria-hidden="true"
+>
+  <div class="space-backdrop__art" data-background-art></div>
+  <div class="space-backdrop__stars"></div>
+  <div class="space-backdrop__glow"></div>
+  <div class="space-backdrop__veil"></div>
+</div>
+
+<style>
+  .space-backdrop {
+    --art-opacity: 0.68;
+    --art-position: center;
+    --drift-x: -1.5%;
+    --drift-y: 1%;
+    position: fixed;
+    z-index: 0;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    background: var(--color-bg-deep);
+    isolation: isolate;
+  }
+
+  .space-backdrop__art,
+  .space-backdrop__stars,
+  .space-backdrop__glow,
+  .space-backdrop__veil {
+    position: absolute;
+    inset: 0;
+  }
+
+  .space-backdrop__art {
+    inset: -4%;
+    background-image: var(--space-art);
+    background-position: var(--art-position);
+    background-size: cover;
+    filter: saturate(0.88) contrast(1.06);
+    opacity: var(--art-opacity);
+    transform: scale(1.06);
+    animation: art-drift 34s ease-in-out infinite alternate;
+    will-change: transform;
+  }
+
+  .space-backdrop__stars {
+    background-image:
+      radial-gradient(circle, rgb(255 255 255 / 72%) 0 1px, transparent 1.5px),
+      radial-gradient(circle, rgb(128 199 242 / 48%) 0 1px, transparent 1.5px);
+    background-position:
+      0 0,
+      3.5rem 5rem;
+    background-size:
+      9rem 11rem,
+      13rem 15rem;
+    mask-image: linear-gradient(
+      110deg,
+      transparent 8%,
+      #000 52%,
+      transparent 96%
+    );
+    opacity: 0.22;
+    animation: star-drift 70s linear infinite;
+  }
+
+  .space-backdrop__glow {
+    background:
+      radial-gradient(
+        circle at 78% 22%,
+        color-mix(
+          in srgb,
+          var(--theme-glow, var(--color-accent)) 14%,
+          transparent
+        ),
+        transparent 32rem
+      ),
+      radial-gradient(
+        circle at 45% 115%,
+        rgb(24 76 118 / 22%),
+        transparent 43rem
+      );
+    mix-blend-mode: screen;
+    opacity: 0.7;
+    animation: glow-breathe 12s ease-in-out infinite alternate;
+  }
+
+  .space-backdrop__veil {
+    background:
+      linear-gradient(
+        90deg,
+        rgb(1 4 13 / 96%) 0%,
+        rgb(1 4 13 / 86%) 38%,
+        rgb(1 4 13 / 48%) 72%,
+        rgb(1 4 13 / 66%) 100%
+      ),
+      linear-gradient(180deg, rgb(1 4 13 / 12%), rgb(1 4 13 / 72%));
+  }
+
+  .space-backdrop--home {
+    --art-position: 62% center;
+    --theme-glow: var(--color-accent);
+  }
+
+  .space-backdrop--game {
+    --art-position: 61% center;
+    --theme-glow: #80c7f2;
+    --drift-x: -2%;
+  }
+
+  .space-backdrop--engine {
+    --art-position: 64% center;
+    --theme-glow: #5fb8ff;
+    --drift-y: -1.25%;
+  }
+
+  .space-backdrop--roadmap {
+    --art-position: 58% center;
+    --theme-glow: #f2a83b;
+    --drift-x: 1.5%;
+  }
+
+  .space-backdrop--updates {
+    --art-position: 62% center;
+    --theme-glow: #9f8cff;
+    --drift-y: -1%;
+  }
+
+  @keyframes art-drift {
+    to {
+      transform: translate3d(var(--drift-x), var(--drift-y), 0) scale(1.1);
+    }
+  }
+
+  @keyframes star-drift {
+    to {
+      transform: translate3d(-3rem, 2rem, 0);
+    }
+  }
+
+  @keyframes glow-breathe {
+    to {
+      opacity: 0.94;
+      transform: scale(1.04);
+    }
+  }
+
+  @media (max-width: 48rem) {
+    .space-backdrop {
+      --art-opacity: 0.58;
+    }
+
+    .space-backdrop__art {
+      inset: -7%;
+    }
+
+    .space-backdrop__veil {
+      background:
+        linear-gradient(90deg, rgb(1 4 13 / 90%), rgb(1 4 13 / 56%)),
+        linear-gradient(180deg, rgb(1 4 13 / 20%), rgb(1 4 13 / 78%));
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .space-backdrop__art,
+    .space-backdrop__stars,
+    .space-backdrop__glow {
+      animation: none;
+    }
+
+    .space-backdrop__art {
+      transform: scale(1.06);
+    }
+  }
+</style>

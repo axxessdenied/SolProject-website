@@ -23,7 +23,11 @@ const { update } = Astro.props;
 const { Content } = await render(update);
 ---
 
-<BaseLayout title={update.data.title} description={update.data.description}>
+<BaseLayout
+  title={update.data.title}
+  description={update.data.description}
+  background="updates"
+>
   <article class="update-article container section-pad">
     <a class="back-link" href={withBase('updates/')}
       ><span aria-hidden="true">←</span> All updates</a

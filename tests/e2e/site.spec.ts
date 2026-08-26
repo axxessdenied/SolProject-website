@@ -3,11 +3,31 @@ import { expect, test } from '@playwright/test';
 
 const basePath = '/SolProject-website/';
 const primaryRoutes = [
-  { path: '', heading: 'A galaxy that moves without you.' },
-  { path: 'game/', heading: 'Make a life between the stars.' },
-  { path: 'engine/', heading: 'The machinery behind the horizon.' },
-  { path: 'roadmap/', heading: 'Built in runnable milestones.' },
-  { path: 'updates/', heading: 'Signals from the build.' },
+  {
+    path: '',
+    heading: 'A galaxy that moves without you.',
+    background: 'home',
+  },
+  {
+    path: 'game/',
+    heading: 'Make a life between the stars.',
+    background: 'game',
+  },
+  {
+    path: 'engine/',
+    heading: 'The machinery behind the horizon.',
+    background: 'engine',
+  },
+  {
+    path: 'roadmap/',
+    heading: 'Built in runnable milestones.',
+    background: 'roadmap',
+  },
+  {
+    path: 'updates/',
+    heading: 'Signals from the build.',
+    background: 'updates',
+  },
 ] as const;
 
 const navigation = [
@@ -28,6 +48,17 @@ for (const route of primaryRoutes) {
     await expect(
       page.getByRole('heading', { level: 1, name: route.heading }),
     ).toBeVisible();
+
+    const backdrop = page.locator(
+      `[data-space-backdrop="${route.background}"]`,
+    );
+    await expect(backdrop).toHaveCount(1);
+    const backgroundImage = await backdrop
+      .locator('[data-background-art]')
+      .evaluate((element) => getComputedStyle(element).backgroundImage);
+    expect(backgroundImage).toContain(
+      `${basePath}images/backgrounds/${route.background}.webp`,
+    );
 
     const primaryNav = page.getByRole('navigation', {
       name: 'Primary navigation',
@@ -77,6 +108,17 @@ test('keyboard users can reach and use the skip link', async ({ page }) => {
 
   await page.keyboard.press('Enter');
   await expect(page).toHaveURL(/#main-content$/);
+});
+
+test('space backdrop animation respects reduced motion', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('');
+
+  const animationName = await page
+    .locator('[data-background-art]')
+    .evaluate((element) => getComputedStyle(element).animationName);
+
+  expect(animationName).toBe('none');
 });
 
 const mobileRoutes = [
