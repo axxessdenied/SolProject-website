@@ -1,0 +1,89 @@
+---
+title: 'From a playable galaxy to a production toolchain'
+description: 'An August 26 progress report on the completed sandbox passes, playtest-driven game work, and the Forge asset-authoring workflow now connected to the engine.'
+slug: 'playable-galaxy-to-production-tools'
+publishedAt: '2026-08-26'
+tags:
+  - 'milestone'
+  - 'gameplay'
+  - 'tooling'
+draft: false
+---
+
+The Stars Don't Wait has moved well beyond the Phase 8k snapshot described in the previous update. The game now has a cockpit, audio, moving faction borders, visible economic traffic, physical gate transitions, discovery rules, and another round of navigation and world-coherence improvements. In parallel, Sol Engine has gained a purpose-built asset editor—**the Forge**—that can take geometry and textures from editable sources all the way into the running game.
+
+That is a large amount of progress in a short record, but it needs a careful qualifier: **this is still a substantial playable development build, not a finished game**. The implemented systems establish breadth and prove that the architecture can support the intended sandbox. They do not yet provide final content density, a complete campaign, production packaging, broad hardware coverage, or release polish.
+
+This report was checked on August 26, 2026 against [source snapshot `b8ce233`](https://github.com/axxessdenied/SolProject/commit/b8ce2332af8e69a01ec3363c161ee96339a5ad2b), the detailed [engine development plan](https://github.com/axxessdenied/SolProject/blob/main/docs/engine-plan.md), and the [game design document](https://github.com/axxessdenied/SolProject/blob/main/docs/gdd.md). One source inconsistency is worth making explicit: the repository README's short status paragraph still describes Phase 2 as current. The detailed milestone records and current `dev` history document the later work summarized here.
+
+## Phase 8 closed as a complete sandbox pass
+
+Phase 8 ultimately ran from **8a through 8z**: 26 focused milestones layered on top of the engine, flight, combat, universe, and economy foundation completed in Phases 0–7.
+
+The first eleven passes built the connected career loop already covered in the previous update: ship purchasing and outfitting, factions and reputation, simulation-driven contracts, the opening campaign act, custom player UI, exploration, mining, salvage, production chains, navigation aids, direct targeting, and rebindable controls.
+
+The remaining passes tightened that loop and changed how it feels to inhabit:
+
+- **Mission flow became resilient.** Damage within a short assist window can advance a bounty when local security lands the final shot, without incorrectly granting the player reputation for an NPC's kill. Bounties gained deadlines, and mission boards now recompose after relevant state changes while the player remains docked.
+- **The cockpit became the default home.** A modelled interior now surrounds the first-person camera, the HUD is placed into that view, free-look is supported, and chase-camera behavior remains separate.
+- **Performance work began with instruments.** CPU zones, Vulkan GPU timestamp zones, and a readable performance overlay were added before any optimization was authorized. On the recorded development-machine runs, the game used roughly 0.7 ms of CPU work and 0.5 ms of GPU work against a 6.94 ms frame budget; the dominant wait was the 144 Hz display path. The measured economy spike was reduced, but the GPU pass deliberately shipped no speculative optimization.
+- **Navigation gained context.** Previously visited systems can be inspected remotely, docking now uses requested clearance and designated ports, and pilot comms can reveal useful local information that feeds existing bookmark and market-memory systems.
+- **The game gained a first audio path.** Audio source assets cook into an engine format, definitions select cues, and the runtime mixer plays the initial set of game sounds. This is a working system and cue set, not a claim of final sound design.
+- **Wars can change territory.** Contests now emerge from the same faction and ship activity that powers raids and patrols, allowing system ownership and borders to move rather than leaving war as a relationship meter only.
+- **Gate travel became physical and legible.** A jump is now a timed transition entered by flying through a non-solid gate aperture. Later work added a visible translucent membrane, but not an animated or fully general transparency system.
+- **The wider economy gained bodies in the local simulation.** Traders, miners, freighters, and raiders can be promoted from the coarse galaxy schedule into visible ships with cargo and destinations in the active system. Their destruction feeds back into logistics and conflict instead of producing decorative traffic.
+- **Discovery stopped being automatic.** Entering a system no longer reveals its stations and gates wholesale. Existing pulse and target-scan mechanics now govern what the player has actually found, while the simulation keeps the full internal navigation state it needs for NPC behavior.
+
+Taken together, those milestones make the current build much closer to the intended fantasy: not a collection of isolated demos, but one cockpit inside a persistent galaxy whose economy and factions continue to produce events.
+
+## Playtests turned rough edges into roadmap work
+
+After Phase 8, the plan stopped treating every improvement as another letter and recorded a series of focused game and tool phases.
+
+Phases 10 and 11 corrected navigation surfaces that disagreed about where the player was. The system map follows a jump, arrival orientation no longer points the ship back through the gate it just crossed, long labels disclose their truncation, and the target readout calculates an ETA from actual relative closing speed rather than the player's speed alone.
+
+Phase 12 introduced the renderer's first translucent path for the gate membrane. Phase 13 made generated worlds more coherent: extraction stations depend on resources that exist, faction personality influences economic specialization, and populated systems carry more visible presence. These are structural rules and an initial content application, not a claim that every generated system now has final authored character.
+
+Phases 14–16 concentrated on authoring and interaction correctness: values written by a dragged point land on a readable grid; target cycling can move in both directions; map markers can be selected directly; and tests describe the properties a shipped mesh must preserve without freezing assets against future editing.
+
+The LOD work recorded around Phases 17 and 18 then measured where a mesh-level switch becomes visible and added hysteresis so an object does not shimmer between levels near a boundary. The detailed records show the threshold implementation, player sign-off for the original pop, and the later hold rule, even though those two phase headings have not been reconciled with their shipped records.
+
+Phase 19 removed the remaining hardcoded model-name wall from game code. Gates, cockpit geometry, ore chunks, rocks, and weapon bolts resolve through validated data roles, while ships, weapons, and commodities can supply their own model overrides. A freighter now leaves a freighter-sized wreck because the simulation uses the destroyed ship's definition instead of a universal placeholder. The default visuals otherwise remain intentionally unchanged until new assets use those seams.
+
+## The Forge now connects an asset idea to the game
+
+Phase 9 is not a conventional numbered game phase. It grew into an authoring programme, and its named stages **A through R all record shipped work** even though the phase header remains open as an actively refined tool track.
+
+The early stages removed the runtime barrier first. Models became validated data instead of enum members, and the engine gained an editable mesh core with welding, adjacency, normal rebuilding, merging, topology operations, and decimation. A dedicated Forge executable then provided the real renderer, lighting, orbit camera, metric grid, scale references, and measurements needed to inspect an asset before putting it in space.
+
+From there the Forge became an editor rather than a viewer:
+
+- `.forge` files preserve parametric part trees instead of freezing every asset as anonymous triangle soup.
+- Vertices, edges, and faces can be selected and moved; parts can be merged; edges can be split; and faces can be extruded. Direct edits bake only the part whose parametric description can no longer express the result.
+- LOD chains are generated by the cooker and selected by the renderer using measured screen-space thresholds.
+- Procedural texture documents replace the old write-only generation script. The Forge can preview them flat and on the model, edit their rows, and drag supported elements directly in the texture preview.
+- The tool can write narrowly scoped, schema-validated model, ship, and station definition rows without reformatting unrelated comments or values.
+- A mesh authored in the Forge can be assigned data rows and flown in the game without adding a C++ model switch. A second, freighter-specific cockpit was the first new content driven through that complete path.
+
+Later stages focused on whether a person can use the tool repeatedly without fighting its interface. The Forge gained tabs, dockable windows, persistent layouts, panels that use the space they are given, viewport-to-part selection, list hover previews, and stable identities for Blender objects when they are renamed and sent again.
+
+Undo now applies across the mesh, texture, and definition editors with `Ctrl+Z` and `Ctrl+Y`, and the bottom status bar reports what happened in a location that remains visible across docked panels. The status message has a defined lifetime and visibly re-flashes when the same action repeats, so it reports an event rather than merely storing a string.
+
+The latest completed work, **Forge stage R**, closes a practical defect in the Blender bridge. A drop sent while the Forge was closed used to remain in the inbox forever unless every accumulated file was imported manually. Successful drops are now imported on the next launch, moved into a visible `imported/` archive, and excluded from subsequent recursive scans. Failed drops remain pending without being retried twice a second. The stage record reports 12 green suites, both GPU smoke tests passing, and no changes to committed game assets or data.
+
+## Evidence is not the same thing as completion
+
+The development plan is unusually detailed about how each milestone was proved, what changed after a live drive, and which gaps remain. That makes the current build easier to describe honestly: features listed here have implementation and recorded verification behind them, but their known limits travel with the claim.
+
+Several boundaries remain important:
+
+- The current campaign content is an opening act, not a complete authored campaign.
+- The game has initial ships, factions, markets, missions, signals, sounds, and world rules, but not final content breadth or final tuning.
+- The Forge can author and deliver substantial asset content, but it is still being refined from actual use. It is purpose-built for this game, not a general Blender replacement.
+- The performance figures are measurements from a specific development setup and scene. They establish headroom for that snapshot; they are not minimum specifications or a promise about future content loads.
+- Production packaging, distribution layout, broader platform support, and the later Linux backend remain future work.
+- The next milestone after stage R had not been selected in the reviewed source snapshot. Packaging, more Forge workflow work, and another game playtest appear as candidates in the record, not as commitments.
+
+The direction is nevertheless clear. The Stars Don't Wait now has a connected playable foundation and a content path capable of extending it. The next challenge is less about proving that another subsystem can exist and more about using these systems and tools to build depth, discover rough edges, and turn a technically broad build into a coherent game.
+
+See the curated [roadmap](../../roadmap/) for the milestone overview, or read the [full engine plan](https://github.com/axxessdenied/SolProject/blob/main/docs/engine-plan.md) for exit criteria, measured evidence, deviations, and known gaps.
