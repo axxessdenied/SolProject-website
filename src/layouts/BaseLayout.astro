@@ -2,19 +2,22 @@
 import '../styles/global.css';
 import SiteFooter from '../components/SiteFooter.astro';
 import SiteHeader from '../components/SiteHeader.astro';
+import SpaceBackdrop from '../components/SpaceBackdrop.astro';
 import { withBase } from '../lib/paths';
 import { siteName } from '../lib/site';
 
 interface Props {
   title: string;
   description: string;
+  background: 'home' | 'game' | 'engine' | 'roadmap' | 'updates';
 }
 
-const { title, description } = Astro.props;
+const { title, description, background } = Astro.props;
 const pageTitle = title === siteName ? title : `${title} — ${siteName}`;
 const canonical = Astro.site
   ? new URL(Astro.url.pathname, Astro.site)
   : Astro.url;
+const backgroundImage = withBase(`images/backgrounds/${background}.webp`);
 ---
 
 <!doctype html>
@@ -31,10 +34,18 @@ const canonical = Astro.site
     <meta name="twitter:card" content="summary" />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href={withBase('favicon.svg')} type="image/svg+xml" />
+    <link
+      rel="preload"
+      as="image"
+      href={backgroundImage}
+      type="image/webp"
+      fetchpriority="high"
+    />
     <title>{pageTitle}</title>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to main content</a>
+    <SpaceBackdrop image={backgroundImage} theme={background} />
     <div class="site-grid" aria-hidden="true"></div>
     <SiteHeader />
     <main id="main-content">
