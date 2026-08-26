@@ -1,6 +1,11 @@
+import { createRequire } from 'node:module';
 import { defineCollection } from 'astro:content';
-import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
+
+const requireModule = createRequire(import.meta.url);
+const { glob } = requireModule(
+  'astro/loaders',
+) as typeof import('astro/loaders');
 
 const isoCalendarDate = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
 

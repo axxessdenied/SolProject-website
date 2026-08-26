@@ -34,8 +34,8 @@ import { withBase } from '../lib/paths';
         >
       </div>
       <div class="hero-status">
-        <span class="status-chip">Phases 0–8k complete</span>
-        <span>Phase 8l mission-flow work is in progress</span>
+        <span class="status-chip">Playable sandbox foundation</span>
+        <span>Forge authoring stage R completed August 26, 2026</span>
       </div>
     </div>
 
@@ -113,10 +113,10 @@ import { withBase } from '../lib/paths';
       </p>
       <p>
         The current build demonstrates that premise through a seeded galaxy,
-        local production chains, NPC traders and miners, faction conflict,
-        state-driven contracts, ship progression, exploration, mining, salvage,
-        combat, and lossless save/load. Content breadth and further sandbox
-        depth remain future work.
+        local production chains, visible traders and miners, moving faction
+        borders, state-driven contracts, ship progression, exploration, mining,
+        salvage, combat, cockpit flight, audio, and lossless save/load. Content
+        breadth, polish, packaging, and sustained playtesting remain ahead.
       </p>
       <a class="text-link" href={sourceLinks.gameDesign}
         >Read the canonical game design document
@@ -157,6 +157,7 @@ import { withBase } from '../lib/paths';
   .hero-copy {
     position: relative;
     z-index: 2;
+    min-width: 0;
   }
 
   .hero-copy h1 {
@@ -190,6 +191,7 @@ import { withBase } from '../lib/paths';
   .hero-visual {
     display: grid;
     min-height: 36rem;
+    min-width: 0;
     place-items: center;
   }
 
@@ -346,7 +348,7 @@ import { withBase } from '../lib/paths';
 
     .visual-frame {
       width: 30rem;
-      max-width: 120vw;
+      max-width: 100vw;
     }
 
     .source-panel {

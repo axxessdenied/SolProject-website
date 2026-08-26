@@ -79,52 +79,63 @@ test('keyboard users can reach and use the skip link', async ({ page }) => {
   await expect(page).toHaveURL(/#main-content$/);
 });
 
-test('mobile navigation remains available without horizontal page overflow', async ({
-  page,
-}) => {
-  await page.setViewportSize({ width: 375, height: 812 });
-  await page.goto('game/');
+const mobileRoutes = [
+  ...primaryRoutes.map(({ path }) => path),
+  'updates/playable-galaxy-to-production-tools/',
+] as const;
 
-  const primaryNav = page.getByRole('navigation', {
-    name: 'Primary navigation',
+for (const path of mobileRoutes) {
+  test(`${path || 'home'} keeps mobile navigation and content in the viewport`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 375, height: 812 });
+    await page.goto(path);
+
+    const primaryNav = page.getByRole('navigation', {
+      name: 'Primary navigation',
+    });
+    for (const item of navigation) {
+      await expect(
+        primaryNav.getByRole('link', { name: item.label }),
+      ).toBeVisible();
+    }
+
+    const hasOverflow = await page.evaluate(
+      () =>
+        document.documentElement.scrollWidth >
+        document.documentElement.clientWidth,
+    );
+    expect(hasOverflow).toBe(false);
   });
-  for (const item of navigation) {
-    await expect(
-      primaryNav.getByRole('link', { name: item.label }),
-    ).toBeVisible();
-  }
-
-  const hasOverflow = await page.evaluate(
-    () =>
-      document.documentElement.scrollWidth >
-      document.documentElement.clientWidth,
-  );
-  expect(hasOverflow).toBe(false);
-});
+}
 
 test('a published update is listed and has a generated detail page', async ({
   page,
 }) => {
   await page.goto('updates/');
   const updateLink = page.getByRole('link', {
-    name: 'Eleven sandbox milestones change the shape of the build',
+    name: 'From a playable galaxy to a production toolchain',
     exact: true,
   });
   await expect(updateLink).toHaveAttribute(
     'href',
-    `${basePath}updates/sandbox-depth-playtest-pass/`,
+    `${basePath}updates/playable-galaxy-to-production-tools/`,
   );
 
   await updateLink.click();
   await expect(
     page.getByRole('heading', {
       level: 1,
-      name: 'Eleven sandbox milestones change the shape of the build',
+      name: 'From a playable galaxy to a production toolchain',
     }),
   ).toBeVisible();
 });
 
-for (const path of ['', 'game/', 'updates/sandbox-depth-playtest-pass/']) {
+for (const path of [
+  '',
+  'game/',
+  'updates/playable-galaxy-to-production-tools/',
+]) {
   test(`${path || 'home'} has no serious or critical axe violations`, async ({
     page,
   }) => {

@@ -54,93 +54,94 @@ const completedPhases = [
 
 const sandboxMilestones = [
   {
-    number: '8a',
-    title: 'Outfitting, progression + purchasing',
+    number: '8a–g',
+    title: 'Career, factions + economy',
     summary:
-      'Ship ownership, station purchases, modules, weapons, crew, insurance, death recovery, and hardcore saves.',
-    completed: 'August 15, 2026',
+      'Ship ownership and fitting, faction relations, simulation-driven missions, custom UI, exploration, mining, salvage, production chains, and market intelligence.',
+    completed: 'August 15–16, 2026',
   },
   {
-    number: '8b',
-    title: 'Factions + reputation',
+    number: '8h–m',
+    title: 'Playtest-driven flight + mission flow',
     summary:
-      'Live faction relations, wars, raids, patrols, player standing, docking consequences, and gated station catalogs.',
-    completed: 'August 15, 2026',
-  },
-  {
-    number: '8c',
-    title: 'Missions + contracts',
-    summary:
-      'Simulation-driven contracts, Lua-authored multi-step missions, saved journals, and a playable opening campaign act.',
-    completed: 'August 16, 2026',
-  },
-  {
-    number: '8d',
-    title: 'Custom game UI',
-    summary:
-      'An in-repo UI renderer, cooked fonts, flight HUD, station screens, menus, saves, pause, and settings.',
-    completed: 'August 16, 2026',
-  },
-  {
-    number: '8e',
-    title: 'Exploration, scanning + maps',
-    summary:
-      'System knowledge, scan pulses, target scans, signals, survey data, route plotting, and system and galaxy maps.',
-    completed: 'August 16, 2026',
-  },
-  {
-    number: '8f',
-    title: 'Mining, salvage + refining',
-    summary:
-      'Seeded asteroid fields, beam extraction, collectible ore, persistent wrecks, and station refining jobs.',
-    completed: 'August 16, 2026',
-  },
-  {
-    number: '8g',
-    title: 'Economy coherence',
-    summary:
-      'Input-gated production chains, NPC miners, rebalanced logistics, and age-stamped remote market reports.',
-    completed: 'August 16, 2026',
-  },
-  {
-    number: '8h',
-    title: 'Situational awareness + navigation',
-    summary:
-      'Contact radar, separate nav and combat targets, map zoom and pan, bookmarks, and ship information.',
+      'Radar, map controls, mission markers, direct target selection, rebindable controls, resilient bounty credit, live mission boards, and a modelled cockpit HUD.',
     completed: 'August 17, 2026',
   },
   {
-    number: '8i',
-    title: 'Mission objectives + threat selection',
+    number: '8n–p',
+    title: 'Measured performance + development UI',
     summary:
-      'Objective locations surfaced across the HUD, radar, and maps, plus direct nearest-hostile selection.',
+      'CPU and GPU frame instrumentation, one measured economy optimization, and full, compact, and hidden development-overlay modes.',
     completed: 'August 17, 2026',
   },
   {
-    number: '8j',
-    title: 'Click-to-select',
+    number: '8q–t',
+    title: 'Remote maps, docking, comms + audio',
     summary:
-      'Direct selection in the flight view and radar, with firing moved to the middle mouse button.',
-    completed: 'August 17, 2026',
+      'Previously visited system maps, requested docking clearance and ports, pilot conversations, and the first cooked-audio and runtime-mixing path.',
+    completed: 'August 18, 2026',
   },
   {
-    number: '8k',
-    title: 'Rebindable controls + live settings',
+    number: '8u–z',
+    title: 'Moving borders, physical travel + a living universe',
     summary:
-      'Persistent key and mouse bindings, conflict handling, and working sensitivity, pitch inversion, and V-Sync controls.',
-    completed: 'August 17, 2026',
+      'Contested territory, fly-through gate transitions, visible economic and raider ships, unified collision queries, and discovery rules for stations and gates.',
+    completed: 'August 18–19, 2026',
+  },
+] as const;
+
+const followupMilestones = [
+  {
+    number: '10–11',
+    title: 'Navigation surfaces + target ETA',
+    summary:
+      'Maps follow system changes, gate arrival faces the playfield, long labels disclose truncation, and target ETA uses actual relative closing speed.',
+    completed: 'August 19, 2026',
+    status: 'Complete',
+  },
+  {
+    number: '12–13',
+    title: 'Gate translucency + coherent worlds',
+    summary:
+      'A translucent gate membrane, resource-aware station placement, faction-shaped markets, and more visible system presence.',
+    completed: 'August 20, 2026',
+    status: 'Complete',
+  },
+  {
+    number: '14–16',
+    title: 'Authoring precision + target selection',
+    summary:
+      'Readable edit-grid values, reverse target cycling, clickable system maps, and asset tests that preserve invariants without freezing content.',
+    completed: 'August 20, 2026',
+    status: 'Complete',
+  },
+  {
+    number: '17–18',
+    title: 'Measured LOD thresholds + hysteresis',
+    summary:
+      'Screen-space measurements set mesh-level switches, and a stateful hold prevents shimmer near their boundaries. The milestone records show shipped work although their headings remain unreconciled.',
+    completed: 'August 21, 2026',
+    status: 'Recorded shipped',
+  },
+  {
+    number: '19',
+    title: 'Data-driven world models',
+    summary:
+      'Hardcoded model names left game code; validated roles and per-content overrides now choose geometry, and wrecks inherit the destroyed ship’s definition.',
+    completed: 'August 21, 2026',
+    status: 'Complete',
   },
 ] as const;
 ---
 
 <BaseLayout
   title="Roadmap"
-  description="A clear view of The Stars Don’t Wait’s completed engine milestones and the sandbox work currently underway."
+  description="A current view of The Stars Don’t Wait’s completed game, engine, and Forge authoring milestones."
 >
   <PageIntro
-    eyebrow="Roadmap / Status checked August 17, 2026"
+    eyebrow="Roadmap / Status checked August 26, 2026"
     title="Built in runnable milestones."
-    intro="The engine plan advances through explicit exit criteria and recorded evidence. Phases 0–7 and focused milestones 8a–8k are complete. Phase 8l is specified and is the current work in the sibling checkout."
+    intro="The detailed engine plan advances through explicit exit criteria and recorded evidence. Phases 0–7 and all 26 Phase 8 sandbox passes are complete; later game work and Forge authoring stages have continued through the latest source snapshot."
   >
     <div class="button-row">
       <a class="button-secondary" href={sourceLinks.enginePlan}
@@ -152,13 +153,13 @@ const sandboxMilestones = [
   <section class="wide-container roadmap-summary" aria-label="Roadmap summary">
     <div class="summary-item complete">
       <span>Complete</span>
-      <strong>Phases 0–7 + 8a–8k</strong>
-      <p>Engine foundation and eleven sandbox-depth milestones</p>
+      <strong>Phases 0–8z + later game passes</strong>
+      <p>Playable foundation, refinement, and data-driven world content</p>
     </div>
     <div class="summary-item next">
-      <span>Current</span>
-      <strong>Phase 8l</strong>
-      <p>Mission kill credit, deadlines, and a board that refreshes in place</p>
+      <span>Latest</span>
+      <strong>Forge stage R</strong>
+      <p>Reliable, exactly-once delivery from the Blender inbox</p>
     </div>
   </section>
 
@@ -192,8 +193,8 @@ const sandboxMilestones = [
   <section class="container section-pad sandbox-section">
     <SectionHeading
       eyebrow="Sandbox depth / Implemented"
-      title="Eleven focused passes turned systems into a playable loop."
-      intro="These milestones were specified one at a time, then closed with tests and live verification. The last four came directly from playtest findings."
+      title="Twenty-six focused passes formed the playable loop."
+      intro="Phase 8a through 8z were specified and closed in small slices. These grouped summaries keep the public roadmap readable; the full plan preserves every milestone’s evidence and caveats."
     />
     <ol class="roadmap-list">
       {
@@ -216,31 +217,56 @@ const sandboxMilestones = [
     </ol>
   </section>
 
+  <section class="container section-pad sandbox-section">
+    <SectionHeading
+      eyebrow="Follow-up phases / Implemented"
+      title="Playtests and authoring work kept changing the build."
+      intro="Numbered work after Phase 8 corrected navigation, added the first translucent rendering path, improved generated-world coherence, and removed hardcoded content boundaries."
+    />
+    <ol class="roadmap-list">
+      {
+        followupMilestones.map((phase) => (
+          <li>
+            <div class="phase-marker" aria-hidden="true">
+              <span>{phase.number}</span>
+            </div>
+            <div class="phase-content">
+              <div class="phase-heading">
+                <h3>{phase.title}</h3>
+                <span class="status-chip">{phase.status}</span>
+              </div>
+              <p>{phase.summary}</p>
+              <small>{phase.completed}</small>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
   <section class="wide-container section-pad next-section">
     <div class="next-card panel">
-      <div class="next-index" aria-hidden="true">8l</div>
+      <div class="next-index" aria-hidden="true">R</div>
       <div>
-        <p class="eyebrow">Current work / Specified</p>
-        <h2>Mission flow that keeps up</h2>
+        <p class="eyebrow">Latest completed / August 26</p>
+        <h2>A Forge workflow that delivers every drop once</h2>
         <p class="next-intro">
-          The fourth playtest exposed a bounty that could become permanently
-          unfinishable when local security landed the last shot, plus a mission
-          board that stayed stale while docked. Phase 8l separates mission
-          credit from reputation credit and refreshes the board when mission
-          state changes.
+          Phase 9 grew into a staged authoring programme. Its A–R records cover
+          data-driven models, editable geometry, LODs, procedural textures,
+          validated content rows, a dockable editor, and a Blender bridge. Stage
+          R fixes the bridge’s pending-file lifecycle.
         </p>
         <ul class="future-list">
-          <li>Short assist window for qualifying player damage</li>
-          <li>Bounty deadlines so impossible work eventually clears</li>
-          <li>Board recomposition after completion, failure, or abandonment</li>
-          <li>
-            Player-visible assist credit without changing reputation rules
-          </li>
+          <li>Import drops sent while the Forge was closed</li>
+          <li>Archive successful deliveries outside the pending queue</li>
+          <li>Skip the recursive archive on every later scan</li>
+          <li>Keep failed drops visible without retrying every poll</li>
         </ul>
         <p class="horizon-note">
-          Beyond 8l, the plan names a cockpit view with an integrated HUD,
-          audio, performance hardening, and a later Linux backend. Those remain
-          future work and are not presented here as implemented.
+          No milestone after stage R is selected in the reviewed snapshot.
+          Production packaging, broader content and playtesting, release polish,
+          and the later Linux backend remain future work rather than a promised
+          next phase.
         </p>
       </div>
     </div>
@@ -250,8 +276,10 @@ const sandboxMilestones = [
     <div class="callout">
       <p>
         <strong>Roadmap language ages quickly.</strong> This page was checked against
-        the canonical engine plan on August 17, 2026. Consult the full plan for the
-        newest phase status and milestone evidence.
+        the detailed engine plan and source history on August 26, 2026. The repository
+        README’s short status line still reports Phase 2, and the Phase 17–18 headings
+        lag their own shipped records. Consult the full plan for the evidence and
+        known gaps behind this curated view.
       </p>
     </div>
   </section>

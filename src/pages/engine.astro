@@ -10,9 +10,9 @@ import { sourceLinks } from '../lib/site';
   description="Inside The Stars Don’t Wait’s from-scratch C++20 engine: architecture, space-scale precision, rendering, simulation, and tools."
 >
   <PageIntro
-    eyebrow="Engine / Implemented foundation"
+    eyebrow="Engine / Implemented systems"
     title="The machinery behind the horizon."
-    intro="Sol Engine is a from-scratch C++20 engine built specifically for a large, persistent space simulation. Eight foundation phases and eleven focused sandbox milestones are implemented and verified; the architecture below distinguishes those systems from work still ahead."
+    intro="Sol Engine is a from-scratch C++20 engine built specifically for a large, persistent space simulation. Its flight, rendering, simulation, UI, audio, data, and authoring systems have advanced through runnable milestones; the architecture below distinguishes that working foundation from release work still ahead."
   >
     <div class="button-row">
       <a class="button-secondary" href={sourceLinks.repository}
@@ -28,7 +28,9 @@ import { sourceLinks } from '../lib/site';
     <div><strong>C++20</strong><span>Exceptions off</span></div>
     <div><strong>Vulkan</strong><span>Custom rendering layer</span></div>
     <div><strong>60 Hz</strong><span>Fixed simulation tick</span></div>
-    <div><strong>10k+</strong><span>Entity milestone demonstrated</span></div>
+    <div>
+      <strong>12 suites</strong><span>Recorded in the current plan</span>
+    </div>
   </section>
 
   <section class="wide-container section-pad architecture-section">
@@ -126,12 +128,13 @@ import { sourceLinks } from '../lib/site';
         </p>
       </article>
       <article class="info-card panel">
-        <span class="index">DATA / HOT RELOAD</span>
-        <h3>Iteration without a restart</h3>
+        <span class="index">DATA + TOOLS / FORGE</span>
+        <h3>Author assets, then fly them</h3>
         <p>
-          Shader, Lua, and validated TOML definitions can reload during
-          development. Mod layers use the same data and scripting mechanisms as
-          the base game.
+          The Forge edits parametric and direct mesh geometry, builds LODs and
+          procedural textures, writes validated model and content rows, and can
+          receive Blender drops. Authored models reach the game through data
+          rather than compiled model-name switches.
         </p>
       </article>
       <article class="info-card panel">
@@ -172,8 +175,8 @@ import { sourceLinks } from '../lib/site';
     <ul class="fact-list principles-list">
       <li>
         <strong>Purpose-built scope</strong>
-        The engine solves this game’s needs: no editor suite, general-purpose abstraction,
-        or speculative subsystem without a milestone that needs it.
+        The engine and its Forge solve this game’s needs without general-purpose abstraction
+        or speculative subsystems that no milestone requires.
       </li>
       <li>
         <strong>Deterministic systems</strong>
